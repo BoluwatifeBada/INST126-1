@@ -46,6 +46,30 @@ def turn(player_name):
     
 # check if fixed
     fixed_dice = []
+# compare what each dice says
+    if dice[0] == dice[1]:
+     fixed_dice = [dice[0], dice[1]]
+    elif dice[1] == dice[2]:
+     fixed_dice = [dice[1], dice[2]] ##
+
+     if fixed_dice:
+        print(f"Fixed dice: {fixed_dice}")
+
+# give the player a chance to reroll or stop
+    choice = input("Type 'reroll' to reroll the die, or 'stop' to stop and keep your score: ") ##
+    if choice == 'reroll':
+        for i in range(3):
+         if dice[i] not in fixed_dice:
+             dice[i] = random.randint(1,6)
+             # print the new roll
+             print (f"New roll: {dice}")
+        return sum(dice)
+    else:
+       # player stops. return score
+       return sum(dice)
+        
+# let's play
+
 
 
 
