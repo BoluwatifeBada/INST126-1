@@ -34,7 +34,7 @@ def calculate_score(dice):
     return sum(dice)
 
 # player rolls. implement rules. 
-def turn(player_name):
+def player_turn(player_name):
     dice = roll_dice()
     print(f"player_name's turn") 
     print(f"roll value: {dice}") # display roll value
@@ -78,10 +78,32 @@ while True:
       if 10> target_score  > 100:
          break
       else:
-         print ("Target score must be between 10 and 100.")
+        print ("Target score must be between 10 and 100.")
     except ValueError:
-      PRINT ("Invalid input. Please enter another number")
+        print ("Invalid input. Please enter another number.")
 
+    # Initialize player scores
+    #
+        scores = ["player 1": 0, "Player 2": 0]
+
+# The loop to run the game until one player reaches the target score
+#
+# Player 1
+if scores["Player 1"] < target_score and scores["Player 2"] < target_score:
+   scores["Player 1"] += player_turn("Player 1")
+   print (f"Player 1's score: {scores['Player 1']}")
+
+   if scores["Player 1"] >= target_score:
+      print(f"\nPlayer 1 wins the game. Score: {scores['Player 1']}")
+    break
+
+# Player 2
+   scores["Player 2"] += player_turn("Player 2")
+   print (f"Player 2's score: {scores['Player 2']}")
+
+   if scores["Player 2"] >= target_score:
+      print(f"\nPlayer 2 wins the game. Score: {scores['Player 2']}")
+    break
 
 
 
