@@ -68,7 +68,20 @@ def turn(player_name):
        # player stops. return score
        return sum(dice)
         
-# let's play
+# let's set target score 
+#
+while True:
+   try:
+      target_score = input("Enter a target score between 10 and 100: ")
+      if 0< target_score <10:
+         break
+      if 10> target_score  > 100:
+         break
+      else:
+         print ("Target score must be between 10 and 100.")
+    except ValueError:
+      PRINT ("Invalid input. Please enter another number")
+
 
 
 
