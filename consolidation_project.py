@@ -53,56 +53,65 @@ def player_turn(player_name):
      fixed_dice = [dice[1], dice[2]] 
     elif dice[0] == dice[2]:
      fixed_dice = [dice[0], dice[2]] 
-
-     if fixed_dice:
+     
+     fixed_dice = list(set(fixed_dice)) # remove duplicate
+     # if fixed, print them
+    if fixed_dice:
         print(f"Fixed dice: {fixed_dice}")
-
+   
 # give the player a chance to reroll or stop
-    choice = input("Type 'reroll' to reroll the die, or 'stop' to stop and keep your score: ") ##
-    if choice == 'reroll':
-        for i in range(3):
-         if dice[i] not in fixed_dice:
-             dice[i] = random.randint(1,6)
-             # print the new roll
-             print (f"New roll: {dice}")
-        return sum(dice)
-    else:
-       # player stops. return score
-       return sum(dice)
-        
-# let's set target score 
-while True:
-   try:
-      target_score = int(input("Enter a target score between 10 and 100: "))
-      if 10 <= target_score <= 100:
-         break  # Valid input, break out of the loop
-      else:
-         print("Target score must be between 10 and 100.")
-   except ValueError:
-      print("Invalid input. Please enter a valid number.")
-      
-# Initialize player scores after the target score is set
-scores = {"Player 1": 0, "Player 2": 0}
+    while True:
+        choice = input("Type 'reroll' to reroll the die, or 'stop' to stop and keep your score: ").lower() # make case-sen
 
-# The loop to run the game until one player reaches the target score
-# Player 1
-while scores["Player 1"] < target_score and scores["Player 2"] < target_score:
-   scores["Player 1"] += player_turn("Player 1")
-   print (f"Player 1's score: {scores['Player 1']}")
-   
-   if scores["Player 1"] >= target_score:
-      print(f"\nPlayer 1 wins the game. Score: {scores['Player 1']}")
-      break
+        if choice == 'reroll':
+            # reroll only the non-fixed dice
+            for i in range(3):
+                if dice[i] not in fixed_dice:
+                    dice[i] = random.randint(1, 6)
+            print(f"New roll: {dice}")
 
-# Player 2
-   scores["Player 2"] += player_turn("Player 2")
-   print (f"Player 2's score: {scores['Player 2']}")
-   
-   if scores["Player 2"] >= target_score:
-      print(f"\nPlayer 2 wins the game. Score: {scores['Player 2']}")
-      break
+        elif choice == 'stop':
+            return calculate_score(dice)  # player stops, return current score
 
+        else:
+            print("Invalid input. Please type 'reroll' or 'stop'.")
+            continue
 
+# let's set target score
+def play_game():
+    # call intro function here so the rules can show
+    introduction()
 
+    # Set target score
+    while True:
+        try:
+            target_score = int(input("Enter a target score between 10 and 100: "))
+            if 10 <= target_score <= 100:
+                break  # Valid input, break out of the loop
+            else:
+                print("Target score must be between 10 and 100.")
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
 
-    
+    # Initialize player scores
+    scores = {"Player 1": 0, "Player 2": 0}
+
+    # The loop to run the game until one player reaches the target score
+    while scores["Player 1"] < target_score and scores["Player 2"] < target_score:
+        # Player 1
+        scores["Player 1"] += player_turn("Player 1")
+        print(f"Player 1's score: {scores['Player 1']}")
+
+        if scores["Player 1"] >= target_score:
+            print(f"\nPlayer 1 wins the game. Score: {scores['Player 1']}")
+            break
+
+        # Player 2
+        scores["Player 2"] += player_turn("Player 2")
+        print(f"Player 2's score: {scores['Player 2']}")
+
+        if scores["Player 2"] >= target_score:
+            print(f"\nPlayer 2 wins the game. Score: {scores['Player 2']}")
+            break
+
+play_game()
