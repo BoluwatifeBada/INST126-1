@@ -19,3 +19,5 @@ Enter a target score.
 Follow the instructions in the rules to play the game.
 The first player to reach the target score wins and the game ends. 
 
+Why this is helpful:
+This README is helpful because it makes sure that users have all the necessary information to set up and play the "Tuple Out Dice Game" correctly. Without it, they might face issues such as not knowing how to navigate to the correct folder, or misunderstanding the game rules. These could prevent them from successfully running the program or enjoying the game as intended.
