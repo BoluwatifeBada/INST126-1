@@ -5,6 +5,8 @@
 # function for if player wants to stop, add up scores
 # use loop to give players turn until they reach target score
 import random
+import time
+import pandas as pd # i've decided to do time and data analysis
 
 # create function to give players an introduction
 def introduction():
@@ -32,6 +34,8 @@ def roll_dice():
 # function to calculate the total score of the dice
 def calculate_score(dice):
     return sum(dice)
+
+roll_data = [] # to store the data of the rolls for analysis 
 
 # player rolls. implement rules. 
 def player_turn(player_name):
